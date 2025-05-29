@@ -1,3 +1,4 @@
+/* This will output "Hello World!" and is written to be needlessly complicated */
 WITH char_data AS (
   SELECT 72 AS a UNION ALL
   SELECT 101 UNION ALL
@@ -38,7 +39,7 @@ FROM (
   ) limit_rows
 WHERE min_rn = 1;
 
-
+/* This will output "Hello World!" with each character in its own column */
 WITH hello AS (
 	SELECT rw, msg
 	FROM (VALUES 
@@ -55,10 +56,11 @@ SELECT * FROM world
 PIVOT (MAX(msg) FOR rw IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
     ;
 
-WITH a AS (SELECT '48656C6C6F')
-, b AS (SELECT '576F726C64')
-, c AS (
-	SELECT CONCAT(a.*,'20',b.*,'21') msg
-	FROM a CROSS JOIN b)
-SELECT HEX_DECODE_STRING(msg) msg FROM c
+/* This will output "Hello World!" by hard coding the hex values for each word*/
+WITH hello AS (SELECT '48656C6C6F')
+, world AS (SELECT '576F726C64')
+, extra AS (
+	SELECT CONCAT(hello.*,'20',world.*,'21') msg
+	FROM hello CROSS JOIN world)
+SELECT HEX_DECODE_STRING(msg) msg FROM extra
 ;
