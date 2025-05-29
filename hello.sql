@@ -10,14 +10,14 @@ WITH char_data AS (
   SELECT 114 UNION ALL
   SELECT 108 UNION ALL
   SELECT 100 UNION ALL
-  SELECT 46
+  SELECT 33
 )
 , gen AS (
   SELECT 1 AS rn 
   UNION ALL
   SELECT rn + 1 
   FROM gen
-  WHERE rn < LENGTH('Hello world.')
+  WHERE rn < LENGTH('Hello world!')
 )
 SELECT msg AS output
 FROM (
